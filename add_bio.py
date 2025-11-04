@@ -6,9 +6,19 @@ def load_json_file(filename):
     with open(filename, 'r') as f:
         return json.load(f)
 
+def get_actor_id(cookies):
+    for cookie in cookies:
+        if cookie['key'] == 'c_user':
+            return cookie['value']
+    return None
+
 def update_facebook_bio(bio_text):
     cookies = load_json_file('cookies.json')
     tokens = load_json_file('dump_Facebook_token.json')
+    
+    actor_id = get_actor_id(cookies)
+    if not actor_id:
+        raise Exception("Nie można znaleźć ID użytkownika w cookies")
     
     cookie_dict = {cookie['key']: cookie['value'] for cookie in cookies}
     
@@ -29,12 +39,12 @@ def update_facebook_bio(bio_text):
         "input": {
             "attribution_id_v2": "ProfileCometTimelineListViewRoot.react,comet.profile.timeline.list,unexpected,1762239359096,829466,190055527696468,,",
             "bio": bio_text,
-            "publish_bio_feed_story": False,
-            "actor_id": "61551395882327",
+            "publish_bio_feed_story": True,
+            "actor_id": actor_id,
             "client_mutation_id": "3"
         },
         "hasProfileTileViewID": True,
-        "profileTileViewID": "cHJvZmlsZV90aWxlX3ZpZXc6NjE1NTEzOTU4ODIzMjc6aW50cm86aW50cm9fYmlvOmludHJvX2NhcmRfYmlvOnByb2ZpbGVfdGltZWxpbmU6MQ==",
+        "profileTileViewID": f"cHJvZmlsZV90aWxlX3ZpZXc6{actor_id}6aW50cm86aW50cm9fYmlvOmludHJvX2NhcmRfYmlvOnByb2ZpbGVfdGltZWxpbmU6MQ==",
         "scale": 1,
         "useDefaultActor": False
     }
