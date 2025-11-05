@@ -52,7 +52,6 @@ def create_story(text, font_id):
                 }
             ],
             "audiences_is_complete": True,
-            "logging": {"composer_session_id": "a66c1fe1-f9ab-431b-a076-fb3cd0b29434"},
             "navigation_data": {"attribution_id_v2": "StoriesCreateRoot.react,comet.stories.create,unexpected,1762321634148,642603,,,;ProfileCometTimelineListViewRoot.react,comet.profile.timeline.list,unexpected,1762321563389,811406,190055527696468,,;CometHomeRoot.react,comet.home,logo,1762321554944,791094,4748854339,,"},
             "source": "WWW",
             "message": {"ranges": [], "text": text},
